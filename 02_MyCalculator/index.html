@@ -4,12 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <title>My Calculator</title>
+    <style>
+        button {
+            width: 30%;
+            height: 30px;
+            text-align: center;
+        }
+
+        #outline {
+            width: 60%;
+            position: absolute;
+            padding: 20%;
+        }
+        #cal{
+            border:1px solid #000 ;
+            width: 91%;
+            height: 30px;
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
 
-   <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
-    
+    <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
+    <div id="outline">
+        <div>
+            <p id="cal"></p>
+        </div>
+        <div>
+            <button onclick="number('1');">1</button>
+            <button onclick="number('2');">2</button>
+            <button onclick="number('3');">3</button>
+            <button onclick="number('4');">4</button>
+            <button onclick="number('5');">5</button>
+            <button onclick="number('6');">6</button>
+            <button onclick="number('7');">7</button>
+            <button onclick="number('8');">8</button>
+            <button onclick="number('9');">9</button>
+            <button onclick="number('0');">0</button>
+            <button onclick="add();">+</button>
+            <button onclick="subtract();">-</button>
+            <button onclick="answer();">=</button>
+        </div>
+    </div>
+    <script>
+        var firstnumber=0;
+        var Scendnumber=0;
+        function number(val) {
+            document.getElementById("cal").innerHTML = document.getElementById("cal").innerHTML + val;
+        }
+        function add(){
+        
+            firstnumber =parseInt(  document.getElementById("cal").textContent);
+            console.log(firstnumber);
+            document.getElementById("cal").innerHTML = "+";
+        
+        }
+        function answer(){
+            firstnumber =parseInt(  document.getElementById("cal").textContent);
+            console.log(firstnumber);
+            document.getElementById("cal").innerHTML = firstnumber;
+        
+        }
+        console.log(firstnumber);
+    </script>
 </body>
 
 </html>
