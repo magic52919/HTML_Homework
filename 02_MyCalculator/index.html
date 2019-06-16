@@ -4,30 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>My Calculator</title>
-    <style>
-        button {
-            width: 30%;
-            height: 30px;
-            text-align: center;
-        }
-
-        #outline {
-            width: 60%;
-            position: absolute;
-            padding: 20%;
-        }
-        #cal{
-            border:1px solid #000 ;
-            width: 91%;
-            height: 30px;
-            text-align: right;
-        }
-    </style>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
-
-    <p><a href="https://www.desmos.com/scientific" target="_blank">參考網路上面的計算機</a></p>
     <div id="outline">
         <div>
             <p id="cal"></p>
@@ -43,31 +23,46 @@
             <button onclick="number('8');">8</button>
             <button onclick="number('9');">9</button>
             <button onclick="number('0');">0</button>
-            <button onclick="add();">+</button>
-            <button onclick="subtract();">-</button>
-            <button onclick="answer();">=</button>
+            <button onclick="operate('+');">+</button>
+            <button onclick="operate('-');">-</button>
+            <button onclick="operate('=');">=</button>
         </div>
     </div>
     <script>
-        var firstnumber=0;
-        var Scendnumber=0;
-        function number(val) {
-            document.getElementById("cal").innerHTML = document.getElementById("cal").innerHTML + val;
+        var answer = 0;
+        var lastvalue = 0;
+        var op = "+";
+        var lastop = "+";
+        var newnumber = true;
+
+        function number(value) {
+            if ((!newnumber) && (document.getElementById("cal") != "0"))
+                document.getElementById("cal").innerHTML += eval(value);
+            else
+                document.getElementById("cal").innerHTML = "" + eval(value);
+            newnumber = false;
         }
-        function add(){
-        
-            firstnumber =parseInt(  document.getElementById("cal").textContent);
-            console.log(firstnumber);
-            document.getElementById("cal").innerHTML = "+";
-        
-        }
-        function answer(){
-            firstnumber =parseInt(  document.getElementById("cal").textContent);
-            console.log(firstnumber);
-            document.getElementById("cal").innerHTML = firstnumber;
-        
-        }
-        console.log(firstnumber);
+        function operate(operation) {
+            if ((newnumber != true) || (op == " = ")) {
+                answer = "" + answer;
+                if ((operation != " = ") && (op != " = ")) {
+                    lastvalue = document.getElementById("cal").innerText;
+                    lastop = op;
+                    answer = eval(answer + lastop + lastvalue);
+                    document.getElementById("cal").innerHTML = answer;
+                }
+                else if (operation == " = ") {
+                    if (op != " = ") {
+                        lastop = op;
+                        lastvalue = document.getElementById("cal").textContent;
+                    }
+                    answer = eval(answer + lastop + lastvalue);
+                    document.getElementById("cal").innerHTML = answer;
+                }
+                newnumber = true;
+            }
+            op = operation;
+        } 
     </script>
 </body>
 
