@@ -31,37 +31,37 @@
     <script>
         var answer = 0;
         var lastvalue = 0;
-        var op = "+";
-        var lastop = "+";
-        var newnumber = true;
+        var symbol = "+";
+        var oldsymbol = "+";
+        var newvalue = true;
 
         function number(value) {
-            if ((!newnumber) && (document.getElementById("cal") != "0"))
+            if ((!newvalue) && (document.getElementById("cal") != "0"))
                 document.getElementById("cal").innerHTML += eval(value);
             else
                 document.getElementById("cal").innerHTML = "" + eval(value);
-            newnumber = false;
+                newvalue = false;
         }
         function operate(operation) {
-            if ((newnumber != true) || (op == " = ")) {
+            if ((newvalue != true) || (symbol == " = ")) {
                 answer = "" + answer;
-                if ((operation != " = ") && (op != " = ")) {
+                if ((operation != " = ") && (symbol != " = ")) {
                     lastvalue = document.getElementById("cal").innerText;
-                    lastop = op;
-                    answer = eval(answer + lastop + lastvalue);
+                    oldsymbol = symbol;
+                    answer = eval(answer + oldsymbol + lastvalue);
                     document.getElementById("cal").innerHTML = answer;
                 }
                 else if (operation == " = ") {
-                    if (op != " = ") {
-                        lastop = op;
+                    if (symbol != " = ") {
+                        oldsymbol = symbol;
                         lastvalue = document.getElementById("cal").textContent;
                     }
-                    answer = eval(answer + lastop + lastvalue);
+                    answer = eval(answer + oldsymbol + lastvalue);
                     document.getElementById("cal").innerHTML = answer;
                 }
-                newnumber = true;
+                newvalue = true;
             }
-            op = operation;
+            symbol = operation;
         } 
     </script>
 </body>
